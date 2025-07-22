@@ -36,6 +36,19 @@ public class MainClass
 		intern.setManager(testManager);
 		
 		//create employees
+		UserNode node1 = new UserNode();
+		UserNode node2 = new UserNode();
+		UserNode node3 = new UserNode();
+		UserNode node4 = new UserNode();
+		UserNode node5 = new UserNode();
+		UserNode node6 = new UserNode();
+		
+		node1.setNextNode(node2);
+		node2.setNextNode(node3);
+		node3.setNextNode(node4);
+		node4.setNextNode(node5);
+		node5.setNextNode(node6);
+		
 		//devs
 		user testEmployee1 = new user();
 		testEmployee1.setFirstName("Jeff");
@@ -45,7 +58,7 @@ public class MainClass
 		testEmployee1.setGender("male");
 		testEmployee1.setPron();
 		testEmployee1.setJob(swEng);
-		testManager.job().addSubordinate(testEmployee1);
+		node1.setUser(testEmployee1);
 		
 		user testEmployee2 = new user();
 		testEmployee2.setFirstName("Lucy");
@@ -55,7 +68,7 @@ public class MainClass
 		testEmployee2.setGender("female");
 		testEmployee2.setPron();
 		testEmployee2.setJob(swEng);
-		testManager.job().addSubordinate(testEmployee2);
+		node2.setUser(testEmployee2);
 		
 		user testEmployee3 = new user();
 		testEmployee3.setFirstName("Luke");
@@ -65,7 +78,7 @@ public class MainClass
 		testEmployee3.setGender("male");
 		testEmployee3.setPron();
 		testEmployee3.setJob(swEng);
-		testManager.job().addSubordinate(testEmployee3);
+		node3.setUser(testEmployee3);
 
 		//qa
 		user testEmployee4 = new user();
@@ -76,7 +89,7 @@ public class MainClass
 		testEmployee4.setGender("female");
 		testEmployee4.setPron();
 		testEmployee4.setJob(qaEng);
-		testManager.job().addSubordinate(testEmployee4);
+		node4.setUser(testEmployee4);
 		
 		user testEmployee5 = new user();
 		testEmployee5.setFirstName("Jane");
@@ -86,7 +99,7 @@ public class MainClass
 		testEmployee5.setGender("female");
 		testEmployee5.setPron();
 		testEmployee5.setJob(qaEng);
-		testManager.job().addSubordinate(testEmployee5);
+		node5.setUser(testEmployee5);
 		
 		//intern
 		user testEmployee6 = new user();
@@ -97,7 +110,17 @@ public class MainClass
 		testEmployee6.setGender("male");
 		testEmployee6.setPron();
 		testEmployee6.setJob(intern);
-		testManager.job().addSubordinate(testEmployee6);
+		node6.setUser(testEmployee6);
+		
+		UserNode node = node1;
+		while (node.next() != null)
+		{
+			if(node.user().job().manager() == testManager)
+			{
+				testManager.job().addSubordinate(node.user());
+			}
+			node = node.next();
+		}
 		
 		//messages
 		String message = String.format("Employee %s %s of age %d was hired. %s had an admission score of %.2f !\n", testManager.lastname(), testManager.firstName(), testManager.age(), testManager.pron(), testManager.score());
